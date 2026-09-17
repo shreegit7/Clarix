@@ -14,13 +14,13 @@ AI-powered task management app that breaks tasks into visual steps.
 - React Native + Expo
 - Supabase (auth + database + edge functions)
 - TypeScript
-- Gemini API
+- On-device rule-based breakdown engine (`lib/task-breakdown`), no AI API calls
 - AsyncStorage
 
 ## Structure
 - `app/(tabs)/` — Briefs, Tasks, Profile tabs
 - `components/` — BriefComposer, BriefCard, BriefKanbanBoard, TaskFlowchart, BriefFollowUpSheet, TaskCard
-- `lib/` — gemini.ts, briefs.ts, auth.ts, supabase.ts
+- `lib/` — gemini.ts (offline entry point, same exports), task-breakdown/, briefs.ts, auth.ts, supabase.ts
 - `contexts/` — AuthContext, KanbanContext
 - `supabase/functions/` — edge functions
 

@@ -14,13 +14,10 @@ npm install
 
 3. Apply Supabase migrations, including the new `brief_payload` migration.
 
-4. Deploy the Edge Function and set function secrets:
-
-```bash
-supabase functions deploy summarize-email
-supabase secrets set GEMINI_API_KEY=your-key
-supabase secrets set GEMINI_MODEL=gemini-2.5-flash
-```
+4. No AI keys needed — task breakdowns are generated on-device by
+   `lib/task-breakdown` (deterministic templates, no network calls).
+   The legacy `summarize-email` Edge Function is retired and no longer
+   invoked by the client.
 
 ## Commands
 
@@ -32,6 +29,8 @@ npm run typecheck
 
 ## Architecture notes
 
-- Gemini is called from the authenticated Supabase Edge Function at `supabase/functions/summarize-email`.
+- Task breakdowns are generated on-device by `lib/task-breakdown`
+  (weighted-keyword classifier + regex extractor + JSON templates).
+  No AI/LLM API is called at runtime.
 - Assistant briefs are stored in `chats.brief_payload` as structured JSON.
 - Existing assistant chat rows still render through a fallback parser until all environments run the migration.
